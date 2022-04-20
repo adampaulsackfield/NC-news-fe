@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 // TODO - Styling button on larger screens
 
-const Article = ({
+const ArticleCard = ({
 	article: {
 		article_id,
 		author,
@@ -57,4 +57,4 @@ const Article = ({
 	);
 };
 
-export default Article;
+export default ArticleCard;

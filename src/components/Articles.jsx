@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 // TODO - Links for username, title and buttons for removing and viewing
 
 import { getArticles } from '../actions/articles';
-import Article from './Article';
+import ArticleCard from './ArticleCard';
 
 const Articles = () => {
 	const [articles, setArticles] = useState([]);
@@ -69,9 +69,12 @@ const Articles = () => {
 				{articles &&
 					articles.map((article) => {
 						if (selectedTopic === 'all') {
-							return <Article article={article} />;
+							return <ArticleCard article={article} />;
 						} else if (article.topic === selectedTopic) {
-							return <Article article={article} />;
+							return <ArticleCard article={article} />;
+						} else {
+							return null;
+							// TODO - Refactor to not use else if
 						}
 					})}
 			</div>
