@@ -3,16 +3,14 @@ import { Link, NavLink } from 'react-router-dom';
 import { Squash as Hamburger } from 'hamburger-react';
 import { toast } from 'react-toastify';
 
-// TODO - Customise the styling for toast notifications
-
-const Navbar = () => {
+const Navbar = ({ user }) => {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [menu, setMenu] = useState(false);
 
 	const handleMockLogin = () => {
 		loggedIn
-			? toast.success('Logout successful')
-			: toast.success('Login successul');
+			? toast.success(`Logout successful. ${user.username} logged out.`)
+			: toast.success(`Login successul. Logged in as ${user.username}`);
 		setMenu(false);
 		setLoggedIn(!loggedIn);
 	};
