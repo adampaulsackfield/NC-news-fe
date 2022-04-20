@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Users from './components/Users';
 import Articles from './components/Articles';
+import SingleArticle from './components/SingleArticle';
 
 const App = () => {
 	return (
@@ -16,6 +17,7 @@ const App = () => {
 					<Route path='/' element={<Home />} />
 					<Route path='/users' element={<Users />} />
 					<Route path='/articles' element={<Articles />} />
+					<Route path='/article/:article_id' element={<SingleArticle />} />
 				</Routes>
 				<ToastContainer closeOnClick pauseOnHover />
 			</div>

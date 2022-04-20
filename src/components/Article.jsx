@@ -1,8 +1,19 @@
 import React from 'react';
 import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
+
+// TODO - Styling button on larger screens
 
 const Article = ({
-	article: { author, comment_count, created_at, title, topic, votes },
+	article: {
+		article_id,
+		author,
+		comment_count,
+		created_at,
+		title,
+		topic,
+		votes,
+	},
 }) => {
 	return (
 		<div class='p-6'>
@@ -34,6 +45,12 @@ const Article = ({
 							{created_at}
 						</Moment>
 					</p>
+					<Link
+						to={`/article/${article_id}`}
+						className='mt-2 text-center text-white px-2 py-1 bg-light inline rounded-lg transition ease-in duration-200 md:px-4 md:py-2 hover:scale-110'
+					>
+						View Article
+					</Link>
 				</div>
 			</div>
 		</div>
