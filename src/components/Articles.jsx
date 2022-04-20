@@ -35,7 +35,7 @@ const Articles = () => {
 				<button
 					onClick={(e) => handleTopicSelector(e)}
 					name='all'
-					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2'
+					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
 				>
 					all
 				</button>
@@ -43,7 +43,7 @@ const Articles = () => {
 				<button
 					onClick={(e) => handleTopicSelector(e)}
 					name='coding'
-					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2'
+					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
 				>
 					coding
 				</button>
@@ -51,7 +51,7 @@ const Articles = () => {
 				<button
 					onClick={(e) => handleTopicSelector(e)}
 					name='cooking'
-					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2'
+					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
 				>
 					cooking
 				</button>
@@ -59,7 +59,7 @@ const Articles = () => {
 				<button
 					onClick={(e) => handleTopicSelector(e)}
 					name='football'
-					className='text-light px-2 py-1 border-2 border-light inline rounded-lg'
+					className='text-light px-2 py-1 border-2 border-light inline rounded-lg transition ease-in duration-200 hover:scale-110'
 				>
 					football
 				</button>
