@@ -40,7 +40,7 @@ const SingleArticle = () => {
 								<dt className='text-sm font-medium sm:text-lg md:text-xl lg:text-2xl'>
 									Article Title
 								</dt>
-								<dd className='mt-1 text-sm text-dark sm:mt-0 sm:col-span-2'>
+								<dd className='mt-1 text-sm sm:text-md md:text-lg lg:text-xl text-dark sm:mt-0 sm:col-span-2'>
 									{article.title}
 								</dd>
 							</div>
@@ -48,7 +48,7 @@ const SingleArticle = () => {
 								<dt className='text-sm font-medium sm:text-lg md:text-xl lg:text-2xl'>
 									Author
 								</dt>
-								<dd className='mt-1 text-sm text-light sm:mt-0 sm:col-span-2'>
+								<dd className='mt-1 text-sm sm:text-md md:text-lg lg:text-xl text-light sm:mt-0 sm:col-span-2'>
 									{article.author}
 								</dd>
 							</div>
