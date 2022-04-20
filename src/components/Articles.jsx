@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Moment from 'react-moment';
-// import 'moment-timezone';
+import { toast } from 'react-toastify';
 
 // TODO - Links for username, title and buttons for removing and viewing
 
@@ -12,30 +12,23 @@ const Articles = () => {
 	useEffect(() => {
 		getArticles()
 			.then((data) => {
-				console.log(data.articles);
 				setArticles([...data.articles]);
 			})
 			.catch((err) => {
+				toast.error('Failed to load articles. Please refresh the page.');
 				console.log(err);
 			});
 	}, []);
 
 	return (
-		<div className='h-screen'>
+		<div className='h-full'>
 			<h1>Articles</h1>
 
 			<div className='grid grid-cols-1 gap-4'>
 				{articles &&
 					articles.map((article) => {
-						const {
-							article_id,
-							author,
-							comment_count,
-							created_at,
-							title,
-							topic,
-							votes,
-						} = article;
+						const { author, comment_count, created_at, title, topic, votes } =
+							article;
 
 						return (
 							<div class='p-6'>
