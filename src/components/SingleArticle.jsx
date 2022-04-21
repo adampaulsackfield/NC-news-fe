@@ -2,18 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getArticle } from '../actions/article';
+import { getComments } from '../actions/comments';
+import Comment from './Comment';
 
 const SingleArticle = () => {
 	const { article_id } = useParams();
 	const [article, setArticle] = useState({});
+	const [comments, setComments] = useState([]);
 
 	useEffect(() => {
 		getArticle(article_id)
 			.then((data) => {
 				setArticle(data.article);
 			})
+			.then(() => {
+				getComments(article_id).then((data) => {
+					setComments([...data.comments]);
+				});
+			})
 			.catch((err) => {
-				toast.error('Failed to load article. Please refresh the page.');
+				toast.error('Failed to load article data. Please refresh the page.');
 				console.log(err);
 			});
 	}, [article_id]);
@@ -84,10 +92,10 @@ const SingleArticle = () => {
 								</dt>
 								<dd className='mt-1 text-sm sm:text-md md:text-lg lg:text-xl sm:mt-0 sm:col-span-2'>
 									<ul className='border border-light rounded-md divide-y divide-light'>
-										<li>comment</li>
-										<li>comment</li>
-										<li>comment</li>
-										<li>comment</li>
+										{comments &&
+											comments.map((comment) => {
+												return <Comment comment={comment} />;
+											})}
 									</ul>
 								</dd>
 							</div>
