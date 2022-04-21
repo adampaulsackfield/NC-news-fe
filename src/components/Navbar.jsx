@@ -15,6 +15,7 @@ const Navbar = () => {
 
 	const handleMockLogin = () => {
 		loggedIn
+
 			? toast.success(
 					`Logout successful. ${userValues.user.username} logged out.`
 			  )

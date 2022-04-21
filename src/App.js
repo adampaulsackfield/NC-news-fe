@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -8,6 +9,8 @@ import Home from './components/Home';
 import Users from './components/Users';
 import Articles from './components/Articles';
 import SingleArticle from './components/SingleArticle';
+import { useEffect, useState } from 'react';
+import { getUsers } from './actions/user';
 
 import { UserContext } from './context/UserContext';
 import { getUsers } from './actions/user';
@@ -29,6 +32,7 @@ const App = () => {
 	}, []);
 
 	return (
+
 		<UserContext.Provider value={{ user, setUser }}>
 			<div className=' bg-dark text-white'>
 				<div className='container mx-auto'>
