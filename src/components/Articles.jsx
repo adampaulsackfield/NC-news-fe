@@ -72,11 +72,13 @@ const Articles = ({ loggedIn }) => {
 					articles.map((article) => {
 						if (selectedTopic === 'all') {
 							return <ArticleCard article={article} loggedIn={loggedIn} />;
-						} else if (article.topic === selectedTopic) {
-							return <ArticleCard article={article} loggedIn={loggedIn} />;
 						} else {
-							return null;
-							// TODO - Refactor to not use else if
+							return (
+								<ArticleCard
+									article={article.topic === selectedTopic && article}
+									loggedIn={loggedIn}
+								/>
+							);
 						}
 					})}
 			</div>
