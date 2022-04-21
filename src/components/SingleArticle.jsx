@@ -21,14 +21,16 @@ const SingleArticle = ({ loggedIn }) => {
 
 	const handleUpvote = () => {
 		if (!loggedIn) {
-			toast.warning('You must be logged in to upvote articles');
+			toast.warning('You must be logged in to upvote articles', {
+				theme: 'dark',
+			});
 		} else {
 			upvote(article_id)
 				.then((data) => {
-					toast.success('Upvote successful');
+					toast.success('Upvote successful', { theme: 'dark' });
 				})
 				.catch((err) => {
-					toast.error('Upvote failed');
+					toast.error('Upvote failed', { theme: 'dark' });
 					console.log(err);
 				});
 			setArticleVotes(1);
@@ -42,13 +44,13 @@ const SingleArticle = ({ loggedIn }) => {
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
 		if (!loggedIn) {
-			toast.warning('You must be logged in to comment');
+			toast.warning('You must be logged in to comment', { theme: 'dark' });
 		} else {
 			formData.username = userValues.user.username;
 
 			addComment(article.article_id, formData)
 				.then((data) => {
-					toast.success('Comment added successfully');
+					toast.success('Comment added successfully', { theme: 'dark' });
 
 					setComments([...comments, data.comment]);
 
@@ -58,7 +60,7 @@ const SingleArticle = ({ loggedIn }) => {
 					});
 				})
 				.catch((err) => {
-					toast.error('Comment failed to be added');
+					toast.error('Comment failed to be added', { theme: 'dark' });
 					console.log(err);
 				});
 		}
@@ -75,7 +77,9 @@ const SingleArticle = ({ loggedIn }) => {
 				});
 			})
 			.catch((err) => {
-				toast.error('Failed to load article data. Please refresh the page.');
+				toast.error('Failed to load article data. Please refresh the page.', {
+					theme: 'dark',
+				});
 				console.log(err);
 			});
 	}, [article_id]);

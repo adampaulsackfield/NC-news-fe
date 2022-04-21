@@ -23,14 +23,16 @@ const ArticleCard = ({
 
 	const handleUpvote = () => {
 		if (!loggedIn) {
-			toast.warning('You must be logged in to upvote articles');
+			toast.warning('You must be logged in to upvote articles', {
+				theme: 'dark',
+			});
 		} else {
 			upvote(article_id)
 				.then((data) => {
-					toast.success('Upvote successful');
+					toast.success('Upvote successful', { theme: 'dark' });
 				})
 				.catch((err) => {
-					toast.error('Upvote failed');
+					toast.error('Upvote failed', { theme: 'dark' });
 					console.log(err);
 				});
 			setArticleVotes(1);

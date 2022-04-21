@@ -16,7 +16,9 @@ const Articles = ({ loggedIn }) => {
 				setArticles([...data.articles]);
 			})
 			.catch((err) => {
-				toast.error('Failed to load articles. Please refresh the page.');
+				toast.error('Failed to load articles. Please refresh the page.', {
+					theme: 'dark',
+				});
 				console.log(err);
 			});
 	}, []);
