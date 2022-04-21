@@ -15,6 +15,7 @@ import { UserContext } from './context/UserContext';
 
 const App = () => {
 	const [user, setUser] = useState('');
+	const [loggedIn, setLoggedIn] = useState(false);
 
 	useEffect(() => {
 		getUsers()
@@ -33,12 +34,18 @@ const App = () => {
 		<UserContext.Provider value={{ user, setUser }}>
 			<div className=' bg-dark text-white'>
 				<div className='container mx-auto'>
-					<Navbar />
+					<Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/users' element={<Users />} />
-						<Route path='/articles' element={<Articles />} />
-						<Route path='/article/:article_id' element={<SingleArticle />} />
+						<Route
+							path='/articles'
+							element={<Articles loggedIn={loggedIn} />}
+						/>
+						<Route
+							path='/article/:article_id'
+							element={<SingleArticle loggedIn={loggedIn} />}
+						/>
 					</Routes>
 					<ToastContainer closeOnClick pauseOnHover />
 				</div>

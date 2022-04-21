@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { getArticles } from '../actions/articles';
 import ArticleCard from './ArticleCard';
 
-const Articles = () => {
+const Articles = ({ loggedIn }) => {
 	const [articles, setArticles] = useState([]);
 	const [selectedTopic, setSelectedTopic] = useState('all');
 
@@ -69,9 +69,9 @@ const Articles = () => {
 				{articles &&
 					articles.map((article) => {
 						if (selectedTopic === 'all') {
-							return <ArticleCard article={article} />;
+							return <ArticleCard article={article} loggedIn={loggedIn} />;
 						} else if (article.topic === selectedTopic) {
-							return <ArticleCard article={article} />;
+							return <ArticleCard article={article} loggedIn={loggedIn} />;
 						} else {
 							return null;
 							// TODO - Refactor to not use else if

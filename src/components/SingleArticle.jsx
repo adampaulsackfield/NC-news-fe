@@ -3,12 +3,31 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getArticle } from '../actions/article';
 import { getComments } from '../actions/comments';
+import { upvote } from '../actions/upvote';
 import Comment from './Comment';
+import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
 
-const SingleArticle = () => {
+const SingleArticle = ({ loggedIn }) => {
 	const { article_id } = useParams();
 	const [article, setArticle] = useState({});
 	const [comments, setComments] = useState([]);
+	const [articleVotes, setArticleVotes] = useState(0);
+
+	const handleUpvote = () => {
+		if (!loggedIn) {
+			toast.warning('You must be logged in to upvote articles');
+		} else {
+			upvote(article_id)
+				.then((data) => {
+					toast.success('Upvote successful');
+				})
+				.catch((err) => {
+					toast.error('Upvote failed');
+					console.log(err);
+				});
+			setArticleVotes(1);
+		}
+	};
 
 	useEffect(() => {
 		getArticle(article_id)
@@ -75,7 +94,15 @@ const SingleArticle = () => {
 									Votes
 								</dt>
 								<dd className='mt-1 text-sm sm:text-md md:text-lg lg:text-xl sm:mt-0 sm:col-span-2'>
-									{article.votes}
+									{article.votes + articleVotes}
+									<button onClick={handleUpvote} className='ml-2'>
+										<FaAngleUp className='text-light' />
+									</button>
+
+									{/* TODO - Implement downvotes */}
+									{/* <button>
+										<FaAngleDown className='text-light' />
+									</button> */}
 								</dd>
 							</div>
 							<div className=' px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
