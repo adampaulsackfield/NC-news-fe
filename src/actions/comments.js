@@ -16,3 +16,20 @@ export const getComments = (article_id) => {
 
 	return promise;
 };
+
+export const addComment = (article_id, comment) => {
+	const ENDPOINT = 'https://obscure-lowlands-69895.herokuapp.com/api';
+
+	const promise = new Promise((resolve, reject) => {
+		axios
+			.post(`${ENDPOINT}/articles/${article_id}/comments`, comment)
+			.then((res) => {
+				resolve(res.data);
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+
+	return promise;
+};
