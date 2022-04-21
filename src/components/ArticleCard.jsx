@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
-import { upvote } from '../actions/upvote';
+import { upvote } from '../actions/api';
 import { toast } from 'react-toastify';
 
 // TODO - Styling button on larger screens

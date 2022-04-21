@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 // TODO - Links for username, title and buttons for removing and viewing
 
-import { getArticles } from '../actions/articles';
+import { getArticles } from '../actions/api';
 import ArticleCard from './ArticleCard';
 
 const Articles = ({ loggedIn }) => {

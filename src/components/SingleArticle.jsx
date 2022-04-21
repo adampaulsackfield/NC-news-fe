@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getArticle } from '../actions/article';
-import { getComments, addComment } from '../actions/comments';
-import { upvote } from '../actions/upvote';
+import { getArticle, getComments, addComment, upvote } from '../actions/api';
 import Comment from './Comment';
 import { FaAngleUp } from 'react-icons/fa';
 import { UserContext } from '../context/UserContext';
