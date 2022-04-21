@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Squash as Hamburger } from 'hamburger-react';
 import { toast } from 'react-toastify';
 
+import { UserContext } from '../context/UserContext';
+
 // TODO - Customise the styling for toast notifications
 
 const Navbar = () => {
+	const userValues = useContext(UserContext);
+
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [menu, setMenu] = useState(false);
 
 	const handleMockLogin = () => {
 		loggedIn
-			? toast.success('Logout successful')
-			: toast.success('Login successul');
+			? toast.success(
+					`Logout successful. ${userValues.user.username} logged out.`
+			  )
+			: toast.success(
+					`Login successul. Logged in as ${userValues.user.username}`
+			  );
 		setMenu(false);
 		setLoggedIn(!loggedIn);
 	};
