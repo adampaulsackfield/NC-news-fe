@@ -6,6 +6,7 @@ module.exports = {
 			dark: '#242333',
 			light: '#01b0d3',
 			white: '#ffffff',
+			danger: '#f32013',
 		},
 		fontFamily: {
 			serif: ['Merriweather', 'serif'],

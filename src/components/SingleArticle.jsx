@@ -153,7 +153,13 @@ const SingleArticle = ({ loggedIn }) => {
 									<ul className='border border-light rounded-md divide-y divide-light'>
 										{comments &&
 											comments.map((comment) => {
-												return <Comment comment={comment} />;
+												return (
+													<Comment
+														comment={comment}
+														comments={comments}
+														setComments={setComments}
+													/>
+												);
 											})}
 										<form
 											className='flex h-32'
