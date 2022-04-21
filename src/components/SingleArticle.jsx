@@ -155,8 +155,11 @@ const SingleArticle = ({ loggedIn }) => {
 											comments.map((comment) => {
 												return <Comment comment={comment} />;
 											})}
-										<form className='flex' onSubmit={(e) => onSubmitHandler(e)}>
-											<input
+										<form
+											className='flex h-32'
+											onSubmit={(e) => onSubmitHandler(e)}
+										>
+											<textarea
 												className='w-full p-4 border-t mr-0 border-b border-l text-dark border-light bg-white'
 												placeholder='Write a comment...'
 												name='body'
