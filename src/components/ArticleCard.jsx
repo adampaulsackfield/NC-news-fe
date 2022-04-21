@@ -17,19 +17,24 @@ const ArticleCard = ({
 		topic,
 		votes,
 	},
+	loggedIn,
 }) => {
 	const [articleVotes, setArticleVotes] = useState(0);
 
 	const handleUpvote = () => {
-		upvote(article_id)
-			.then((data) => {
-				toast.success('Upvote successful');
-			})
-			.catch((err) => {
-				toast.error('Upvote failed');
-				console.log(err);
-			});
-		setArticleVotes(1);
+		if (!loggedIn) {
+			toast.warning('You must be logged in to upvote articles');
+		} else {
+			upvote(article_id)
+				.then((data) => {
+					toast.success('Upvote successful');
+				})
+				.catch((err) => {
+					toast.error('Upvote failed');
+					console.log(err);
+				});
+			setArticleVotes(1);
+		}
 	};
 
 	return (

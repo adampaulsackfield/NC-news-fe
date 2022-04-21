@@ -7,15 +7,13 @@ import { UserContext } from '../context/UserContext';
 
 // TODO - Customise the styling for toast notifications
 
-const Navbar = () => {
+const Navbar = ({ loggedIn, setLoggedIn }) => {
 	const userValues = useContext(UserContext);
 
-	const [loggedIn, setLoggedIn] = useState(false);
 	const [menu, setMenu] = useState(false);
 
 	const handleMockLogin = () => {
 		loggedIn
-
 			? toast.success(
 					`Logout successful. ${userValues.user.username} logged out.`
 			  )
