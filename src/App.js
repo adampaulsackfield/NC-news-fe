@@ -42,7 +42,10 @@ const App = () => {
 							path='/articles'
 							element={<Articles loggedIn={loggedIn} />}
 						/>
-						<Route path='/article/:article_id' element={<SingleArticle />} />
+						<Route
+							path='/article/:article_id'
+							element={<SingleArticle loggedIn={loggedIn} />}
+						/>
 					</Routes>
 					<ToastContainer closeOnClick pauseOnHover />
 				</div>

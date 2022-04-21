@@ -7,22 +7,26 @@ import { upvote } from '../actions/upvote';
 import Comment from './Comment';
 import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
 
-const SingleArticle = () => {
+const SingleArticle = ({ loggedIn }) => {
 	const { article_id } = useParams();
 	const [article, setArticle] = useState({});
 	const [comments, setComments] = useState([]);
 	const [articleVotes, setArticleVotes] = useState(0);
 
 	const handleUpvote = () => {
-		upvote(article_id)
-			.then((data) => {
-				toast.success('Upvote successful');
-			})
-			.catch((err) => {
-				toast.error('Upvote failed');
-				console.log(err);
-			});
-		setArticleVotes(1);
+		if (!loggedIn) {
+			toast.warning('You must be logged in to upvote articles');
+		} else {
+			upvote(article_id)
+				.then((data) => {
+					toast.success('Upvote successful');
+				})
+				.catch((err) => {
+					toast.error('Upvote failed');
+					console.log(err);
+				});
+			setArticleVotes(1);
+		}
 	};
 
 	useEffect(() => {
