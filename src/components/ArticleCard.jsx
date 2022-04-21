@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { upvote } from '../actions/upvote';
+import { toast } from 'react-toastify';
 
 // TODO - Styling button on larger screens
 
@@ -15,6 +18,20 @@ const ArticleCard = ({
 		votes,
 	},
 }) => {
+	const [articleVotes, setArticleVotes] = useState(0);
+
+	const handleUpvote = () => {
+		upvote(article_id)
+			.then((data) => {
+				toast.success('Upvote successful');
+			})
+			.catch((err) => {
+				toast.error('Upvote failed');
+				console.log(err);
+			});
+		setArticleVotes(1);
+	};
+
 	return (
 		<div class='p-6'>
 			<div className='bg-white p-6 rounded-lg'>
@@ -34,7 +51,10 @@ const ArticleCard = ({
 				</p>
 				<div className='flex flex-col text-dark mt-4 md:flex-row'>
 					<p className='md:mr-4'>
-						Votes: <span className='text-light'>{votes}</span>
+						<button onClick={handleUpvote}>
+							<AiOutlineHeart className='inline text-light text-xl' />{' '}
+							<span className='text-light'>{votes + articleVotes}</span>
+						</button>
 					</p>
 					<p className='md:mr-4'>
 						Comments: <span className='text-light'>{comment_count}</span>
