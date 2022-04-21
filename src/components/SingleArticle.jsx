@@ -1,17 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getArticle } from '../actions/article';
-import { getComments } from '../actions/comments';
+import { getComments, addComment } from '../actions/comments';
 import { upvote } from '../actions/upvote';
 import Comment from './Comment';
-import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
+import { FaAngleUp } from 'react-icons/fa';
+import { UserContext } from '../context/UserContext';
+
+// TODO - Implement downvote
 
 const SingleArticle = ({ loggedIn }) => {
 	const { article_id } = useParams();
 	const [article, setArticle] = useState({});
 	const [comments, setComments] = useState([]);
 	const [articleVotes, setArticleVotes] = useState(0);
+	const [formData, setFormData] = useState({
+		username: '',
+		body: '',
+	});
+	const userValues = useContext(UserContext);
 
 	const handleUpvote = () => {
 		if (!loggedIn) {
@@ -26,6 +34,35 @@ const SingleArticle = ({ loggedIn }) => {
 					console.log(err);
 				});
 			setArticleVotes(1);
+		}
+	};
+
+	const onChangeHandler = (e) => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
+	const onSubmitHandler = (e) => {
+		e.preventDefault();
+		if (!loggedIn) {
+			toast.warning('You must be logged in to comment');
+		} else {
+			formData.username = userValues.user.username;
+
+			addComment(article.article_id, formData)
+				.then((data) => {
+					toast.success('Comment added successfully');
+
+					setComments([...comments, data.comment]);
+
+					setFormData({
+						username: '',
+						body: '',
+					});
+				})
+				.catch((err) => {
+					toast.error('Comment failed to be added');
+					console.log(err);
+				});
 		}
 	};
 
@@ -98,11 +135,6 @@ const SingleArticle = ({ loggedIn }) => {
 									<button onClick={handleUpvote} className='ml-2'>
 										<FaAngleUp className='text-light' />
 									</button>
-
-									{/* TODO - Implement downvotes */}
-									{/* <button>
-										<FaAngleDown className='text-light' />
-									</button> */}
 								</dd>
 							</div>
 							<div className=' px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
@@ -123,6 +155,21 @@ const SingleArticle = ({ loggedIn }) => {
 											comments.map((comment) => {
 												return <Comment comment={comment} />;
 											})}
+										<form
+											className='flex h-32'
+											onSubmit={(e) => onSubmitHandler(e)}
+										>
+											<textarea
+												className='w-full p-4 border-t mr-0 border-b border-l text-dark border-light bg-white'
+												placeholder='Write a comment...'
+												name='body'
+												value={formData.body}
+												onChange={(e) => onChangeHandler(e)}
+											/>
+											<button className='px-2 bg-light  text-white font-bold p-4 uppercase border-light border-t border-b border-r transition ease-in duration-200 hover:scale-105'>
+												Comment
+											</button>
+										</form>
 									</ul>
 								</dd>
 							</div>
