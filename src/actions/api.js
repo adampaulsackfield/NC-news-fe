@@ -5,18 +5,9 @@ const ENDPOINT = 'https://obscure-lowlands-69895.herokuapp.com/api';
 // Articles
 // ========
 export const getArticle = (article_id) => {
-	const promise = new Promise((resolve, reject) => {
-		axios
-			.get(`${ENDPOINT}/articles/${article_id}`)
-			.then((res) => {
-				resolve(res.data);
-			})
-			.catch((err) => {
-				reject(err);
-			});
+	return axios.get(`${ENDPOINT}/articles/${article_id}`).then((res) => {
+		return res.data;
 	});
-
-	return promise;
 };
 
 export const getArticles = () => {
