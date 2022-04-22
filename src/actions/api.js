@@ -66,6 +66,24 @@ export const addComment = (article_id, comment) => {
 	return promise;
 };
 
+export const deleteComment = (comment_id) => {
+	const ENDPOINT = 'https://obscure-lowlands-69895.herokuapp.com/api';
+
+	const promise = new Promise((resolve, reject) => {
+		axios
+			.delete(`${ENDPOINT}/comments/${comment_id}`)
+			.then((res) => {
+				console.log(res.data, '<<<');
+				resolve(res.data);
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+
+	return promise;
+};
+
 // Voting
 // ======
 export const upvote = (article_id) => {

@@ -33,11 +33,10 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
 			<Link to='/' className='text-light' onClick={() => setMenu(false)}>
 				NC News
 			</Link>
-
+			{/* //! TODO - Axe warning about missing aria */}
 			<div className='md:hidden'>
 				<Hamburger rounded toggled={menu} color='#01b0d3' toggle={toggleMenu} />
 			</div>
-
 			<nav
 				className={`w-full md:flex md:items-center md:w-auto ${
 					!menu ? ' hidden' : undefined

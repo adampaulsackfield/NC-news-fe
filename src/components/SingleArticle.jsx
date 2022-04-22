@@ -85,7 +85,7 @@ const SingleArticle = ({ loggedIn }) => {
 	}, [article_id]);
 
 	return (
-		<div className='min-h-screen pb-20'>
+		<main className='min-h-screen pb-20'>
 			<h1 className='text-4xl text-white text-center mt-4 mb-8'>
 				Single Article
 			</h1>
@@ -93,9 +93,9 @@ const SingleArticle = ({ loggedIn }) => {
 			{article ? (
 				<div className='m-4 bg-white overflow-hidden text-dark rounded-lg'>
 					<div className='px-4 py-5 sm:px-6'>
-						<h3 className='text-lg leading-6 font-medium text-light sm:text-2xl md:text-3xl lg:text-4xl'>
+						<h2 className='text-lg leading-6 font-medium text-light sm:text-2xl md:text-3xl lg:text-4xl'>
 							Article ID: {article_id}
-						</h3>
+						</h2>
 						<p className='mt-1 max-w-2xl text-sm sm:text-lg md:text-xl lg:text-2xl'>
 							All article details below
 						</p>
@@ -134,7 +134,11 @@ const SingleArticle = ({ loggedIn }) => {
 								</dt>
 								<dd className='mt-1 text-sm sm:text-md md:text-lg lg:text-xl sm:mt-0 sm:col-span-2'>
 									{article.votes + articleVotes}
-									<button onClick={handleUpvote} className='ml-2'>
+									<button
+										onClick={handleUpvote}
+										className='ml-2'
+										aria-label='Upvote Icon'
+									>
 										<FaAngleUp className='text-light' />
 									</button>
 								</dd>
@@ -164,21 +168,23 @@ const SingleArticle = ({ loggedIn }) => {
 													/>
 												);
 											})}
-										<form
-											className='flex h-32'
-											onSubmit={(e) => onSubmitHandler(e)}
-										>
-											<textarea
-												className='w-full p-4 border-t mr-0 border-b border-l text-dark border-light bg-white'
-												placeholder='Write a comment...'
-												name='body'
-												value={formData.body}
-												onChange={(e) => onChangeHandler(e)}
-											/>
-											<button className='px-2 bg-light  text-white font-bold p-4 uppercase border-light border-t border-b border-r transition ease-in duration-200 hover:scale-105'>
-												Comment
-											</button>
-										</form>
+										<li>
+											<form
+												className='flex h-32'
+												onSubmit={(e) => onSubmitHandler(e)}
+											>
+												<textarea
+													className='w-full p-4 border-t mr-0 border-b border-l text-dark border-light bg-white'
+													placeholder='Write a comment...'
+													name='body'
+													value={formData.body}
+													onChange={(e) => onChangeHandler(e)}
+												/>
+												<button className='px-2 bg-light  text-white font-bold p-4 uppercase border-light border-t border-b border-r transition ease-in duration-200 hover:scale-105'>
+													Comment
+												</button>
+											</form>
+										</li>
 									</ul>
 								</dd>
 							</div>
@@ -190,7 +196,7 @@ const SingleArticle = ({ loggedIn }) => {
 					<h1>Loading...</h1>
 				</div>
 			)}
-		</div>
+		</main>
 	);
 };
 

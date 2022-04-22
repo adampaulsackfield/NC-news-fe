@@ -9,7 +9,7 @@ import Home from './components/Home';
 import Users from './components/Users';
 import Articles from './components/Articles';
 import SingleArticle from './components/SingleArticle';
-import { getUsers } from './actions/user';
+import { getUsers } from './actions/api';
 
 import { UserContext } from './context/UserContext';
 

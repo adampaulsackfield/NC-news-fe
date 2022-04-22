@@ -40,19 +40,19 @@ const ArticleCard = ({
 	};
 
 	return (
-		<div className='p-6'>
+		<main className='p-6'>
 			<div className='bg-white p-6 rounded-lg'>
-				<h3 className='text-light mb-2 text-sm font-bold'>
+				<h2 className='text-light mb-2 text-sm font-bold'>
 					<img
 						src='https://placeholder.pics/svg/35x35'
-						alt=''
+						alt='profile placeholder'
 						className='inline mr-2'
 					/>
 					{author}
-				</h3>
-				<h2 className='text-lg mb-2 text-dark font-serif md:mb-6 md:text-2xl'>
-					{title}
 				</h2>
+				<h1 className='text-lg mb-2 text-dark font-serif md:mb-6 md:text-2xl'>
+					{title}
+				</h1>
 				<p className='text-dark px-2 py-1 border-2 border-light inline rounded-lg md:px-4 md:py-2'>
 					{topic}
 				</p>
@@ -80,7 +80,7 @@ const ArticleCard = ({
 					</Link>
 				</div>
 			</div>
-		</div>
+		</main>
 	);
 };
 

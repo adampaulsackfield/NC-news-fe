@@ -6,7 +6,7 @@ import { UserContext } from '../context/UserContext';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { toast } from 'react-toastify';
-import { deleteComment } from '../actions/comments';
+import { deleteComment } from '../actions/api';
 
 const Comment = ({ comment, setComments, comments }) => {
 	const userValues = useContext(UserContext);
@@ -48,7 +48,7 @@ const Comment = ({ comment, setComments, comments }) => {
 	};
 
 	return (
-		<div className='p-2'>
+		<li className='p-2'>
 			<h1 className='text-md tracking-wide mb-2'>{comment.body}</h1>
 			<div>
 				<h2 className='text-light inline'>
@@ -75,7 +75,7 @@ const Comment = ({ comment, setComments, comments }) => {
 					/>
 				</p>
 			</div>
-		</div>
+		</li>
 	);
 };
 
