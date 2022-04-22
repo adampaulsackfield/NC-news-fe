@@ -31,7 +31,7 @@ const Articles = ({ loggedIn }) => {
 				});
 				console.log(err);
 			});
-	}, [sortBy, topic, topics]);
+	}, [sortBy, topic]);
 
 	const sortArticles = (e) => {
 		setSortBy(e.target.name);
