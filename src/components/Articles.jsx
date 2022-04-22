@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { useParams, Link } from 'react-router-dom';
 
 // TODO - Links for username, title and buttons for removing and viewing
 
-import { getArticles } from '../actions/api';
+import { getArticles, getTopics } from '../actions/api';
 import ArticleCard from './ArticleCard';
 
 const Articles = ({ loggedIn }) => {
+	const { topic } = useParams();
+
 	const [articles, setArticles] = useState([]);
-	const [selectedTopic, setSelectedTopic] = useState('all');
+	const [topics, setTopics] = useState([]);
 	const [sortBy, setSortBy] = useState('none');
 
 	useEffect(() => {
-		getArticles(sortBy, selectedTopic)
+		getArticles(sortBy, topic)
 			.then((data) => {
 				setArticles([...data.articles]);
+			})
+			.then(() => {
+				getTopics().then((data) => {
+					console.log('data.topics');
+					setTopics([...data.topics]);
+				});
 			})
 			.catch((err) => {
 				toast.error('Failed to load articles. Please refresh the page.', {
@@ -22,11 +31,7 @@ const Articles = ({ loggedIn }) => {
 				});
 				console.log(err);
 			});
-	}, [sortBy, selectedTopic]);
-
-	const handleTopicSelector = (e) => {
-		setSelectedTopic(e.target.name);
-	};
+	}, [sortBy, topic, topics]);
 
 	const sortArticles = (e) => {
 		setSortBy(e.target.name);
@@ -41,37 +46,25 @@ const Articles = ({ loggedIn }) => {
 			<div className='text-center'>
 				<h1 className='text-xl mb-2'>Filter Articles</h1>
 
-				<button
-					onClick={(e) => handleTopicSelector(e)}
-					name='all'
+				<Link
+					to='/articles'
 					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
 				>
 					All
-				</button>
+				</Link>
 
-				<button
-					onClick={(e) => handleTopicSelector(e)}
-					name='coding'
-					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
-				>
-					Coding
-				</button>
-
-				<button
-					onClick={(e) => handleTopicSelector(e)}
-					name='cooking'
-					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
-				>
-					Cooking
-				</button>
-
-				<button
-					onClick={(e) => handleTopicSelector(e)}
-					name='football'
-					className='text-light px-2 py-1 border-2 border-light inline rounded-lg transition ease-in duration-200 hover:scale-110'
-				>
-					Football
-				</button>
+				{topics &&
+					topics.map((currentTopic) => {
+						console.log(currentTopic);
+						return (
+							<Link
+								to={`/articles/topics/${currentTopic.slug}`}
+								className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110 capitalize'
+							>
+								{currentTopic.slug}
+							</Link>
+						);
+					})}
 			</div>
 
 			<div className='text-center mt-2'>

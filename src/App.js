@@ -9,6 +9,8 @@ import Home from './components/Home';
 import Users from './components/Users';
 import Articles from './components/Articles';
 import SingleArticle from './components/SingleArticle';
+import NotFound from './components/NotFound';
+
 import { getUsers } from './actions/api';
 
 import { UserContext } from './context/UserContext';
@@ -46,6 +48,12 @@ const App = () => {
 							path='/article/:article_id'
 							element={<SingleArticle loggedIn={loggedIn} />}
 						/>
+						<Route
+							path='/articles/topics/:topic'
+							element={<Articles loggedIn={loggedIn} />}
+						/>
+
+						<Route path='*' element={<NotFound />} />
 					</Routes>
 					<ToastContainer closeOnClick pauseOnHover />
 				</div>

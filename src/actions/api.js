@@ -12,7 +12,7 @@ export const getArticle = (article_id) => {
 
 export const getArticles = (sortBy, selectedTopic) => {
 	if (sortBy === 'none') {
-		if (selectedTopic === 'all') {
+		if (!selectedTopic) {
 			return axios.get(`${ENDPOINT}/articles`).then((res) => {
 				return res.data;
 			});
@@ -36,6 +36,15 @@ export const getArticles = (sortBy, selectedTopic) => {
 				});
 		}
 	}
+};
+
+// Topics
+// ======
+export const getTopics = () => {
+	return axios.get(`${ENDPOINT}/topics`).then((res) => {
+		console.log(res.data);
+		return res.data;
+	});
 };
 
 // Comments
