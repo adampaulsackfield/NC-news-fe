@@ -20,7 +20,7 @@ The application has been designed with a mobile first approach and should scale 
 
 #### Technologies
 
-**Backend**
+##### Backend
 
 - Express - Lightweight framework for building APIs
 - PG - Postgres for Node
@@ -29,7 +29,7 @@ The application has been designed with a mobile first approach and should scale 
 - Jest - A framework used for Testing and Test Driven Development
 - Jest-sorted - A Jest package for checking the order of returned values
 
-**Frontend**
+##### Frontend
 
 - React - Frontend framework in JavaScript
 - React-router-dom - A package used for routing of a React Application
