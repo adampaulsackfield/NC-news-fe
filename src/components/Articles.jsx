@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 // TODO - Links for username, title and buttons for removing and viewing
 
-import { getArticles } from '../actions/api';
+import { getArticles, getSortedArticles } from '../actions/api';
 import ArticleCard from './ArticleCard';
 
 const Articles = ({ loggedIn }) => {
@@ -27,6 +27,19 @@ const Articles = ({ loggedIn }) => {
 		setSelectedTopic(e.target.name);
 	};
 
+	const sortArticles = (e) => {
+		getSortedArticles(e.target.name)
+			.then((data) => {
+				setArticles([...data.articles]);
+			})
+			.catch((err) => {
+				toast.error('Failed to load articles. Please refresh the page.', {
+					theme: 'dark',
+				});
+				console.log(err);
+			});
+	};
+
 	return (
 		<div className='min-h-screen h-full'>
 			<h1 className='text-4xl text-center font-serif font-light tracking-wider mb-8'>
@@ -34,12 +47,14 @@ const Articles = ({ loggedIn }) => {
 			</h1>
 
 			<div className='text-center'>
+				<h1 className='text-xl mb-2'>Filter Articles</h1>
+
 				<button
 					onClick={(e) => handleTopicSelector(e)}
 					name='all'
 					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
 				>
-					all
+					All
 				</button>
 
 				<button
@@ -47,7 +62,7 @@ const Articles = ({ loggedIn }) => {
 					name='coding'
 					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
 				>
-					coding
+					Coding
 				</button>
 
 				<button
@@ -55,7 +70,7 @@ const Articles = ({ loggedIn }) => {
 					name='cooking'
 					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
 				>
-					cooking
+					Cooking
 				</button>
 
 				<button
@@ -63,7 +78,43 @@ const Articles = ({ loggedIn }) => {
 					name='football'
 					className='text-light px-2 py-1 border-2 border-light inline rounded-lg transition ease-in duration-200 hover:scale-110'
 				>
-					football
+					Football
+				</button>
+			</div>
+
+			<div className='text-center mt-2'>
+				<h1 className='text-xl mb-2'>Sort Articles</h1>
+
+				<button
+					onClick={(e) => sortArticles(e)}
+					name='article_id'
+					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
+				>
+					Article ID
+				</button>
+
+				<button
+					onClick={(e) => sortArticles(e)}
+					name='created_at'
+					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
+				>
+					Created At
+				</button>
+
+				<button
+					onClick={(e) => sortArticles(e)}
+					name='title'
+					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
+				>
+					Title
+				</button>
+
+				<button
+					onClick={(e) => sortArticles(e)}
+					name='votes'
+					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
+				>
+					Votes
 				</button>
 			</div>
 
