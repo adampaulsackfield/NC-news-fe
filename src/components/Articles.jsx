@@ -59,9 +59,10 @@ const Articles = ({ loggedIn }) => {
 						return (
 							<Link
 								to={`/articles/topics/${currentTopic.slug}`}
-								className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110 capitalize'
+								className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
 							>
-								{currentTopic.slug}
+								{currentTopic.slug[0].toUpperCase() +
+									currentTopic.slug.slice(1)}
 							</Link>
 						);
 					})}
