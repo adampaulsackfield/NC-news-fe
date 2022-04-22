@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 // TODO - Links for username, title and buttons for removing and viewing
 
-import { getArticles } from '../actions/articles';
+import { getArticles } from '../actions/api';
 import ArticleCard from './ArticleCard';
 
 const Articles = ({ loggedIn }) => {
@@ -16,7 +16,9 @@ const Articles = ({ loggedIn }) => {
 				setArticles([...data.articles]);
 			})
 			.catch((err) => {
-				toast.error('Failed to load articles. Please refresh the page.');
+				toast.error('Failed to load articles. Please refresh the page.', {
+					theme: 'dark',
+				});
 				console.log(err);
 			});
 	}, []);
@@ -69,14 +71,7 @@ const Articles = ({ loggedIn }) => {
 				{articles &&
 					articles.map((article) => {
 						if (selectedTopic === 'all') {
-							return (
-								<ArticleCard
-									key={article.article_id}
-									article={article}
-									loggedIn={loggedIn}
-								/>
-							);
-						} else if (article.topic === selectedTopic) {
+
 							return (
 								<ArticleCard
 									key={article.article_id}
@@ -85,8 +80,12 @@ const Articles = ({ loggedIn }) => {
 								/>
 							);
 						} else {
-							return null;
-							// TODO - Refactor to not use else if
+							return (
+								<ArticleCard
+									article={article.topic === selectedTopic && article}
+									loggedIn={loggedIn}
+								/>
+							);
 						}
 					})}
 			</div>

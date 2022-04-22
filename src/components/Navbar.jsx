@@ -5,8 +5,6 @@ import { toast } from 'react-toastify';
 
 import { UserContext } from '../context/UserContext';
 
-// TODO - Customise the styling for toast notifications
-
 const Navbar = ({ loggedIn, setLoggedIn }) => {
 	const userValues = useContext(UserContext);
 
@@ -15,10 +13,12 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
 	const handleMockLogin = () => {
 		loggedIn
 			? toast.success(
-					`Logout successful. ${userValues.user.username} logged out.`
+					`Logout successful. ${userValues.user.username} logged out.`,
+					{ theme: 'dark' }
 			  )
 			: toast.success(
-					`Login successul. Logged in as ${userValues.user.username}`
+					`Login successul. Logged in as ${userValues.user.username}`,
+					{ theme: 'dark' }
 			  );
 		setMenu(false);
 		setLoggedIn(!loggedIn);
