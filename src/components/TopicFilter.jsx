@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getTopics } from '../actions/api';
 
-const TopicFilter = ({ topics, setTopics }) => {
+const TopicFilter = () => {
+	const [topics, setTopics] = useState([]);
+
 	useEffect(() => {
 		getTopics().then((data) => {
 			setTopics([...data.topics]);
 		});
-	}, [setTopics]);
+	}, []);
 
 	return (
 		<div className='text-center'>

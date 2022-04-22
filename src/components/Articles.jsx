@@ -12,7 +12,6 @@ const Articles = ({ loggedIn }) => {
 	const { topic } = useParams();
 
 	const [articles, setArticles] = useState([]);
-	const [topics, setTopics] = useState([]);
 	const [sortBy, setSortBy] = useState('none');
 
 	useEffect(() => {
@@ -38,7 +37,7 @@ const Articles = ({ loggedIn }) => {
 				Articles Listing
 			</h1>
 
-			<TopicFilter topics={topics} setTopics={setTopics} />
+			<TopicFilter />
 
 			<div className='text-center mt-2'>
 				<h1 className='text-xl mb-2'>Sort Articles</h1>
