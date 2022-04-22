@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 // TODO - Links for username, title and buttons for removing and viewing
 
-import { getArticles, getTopics } from '../actions/api';
+import { getArticles } from '../actions/api';
 import ArticleCard from './ArticleCard';
 import TopicFilter from './TopicFilter';
 
