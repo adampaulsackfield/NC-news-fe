@@ -81,6 +81,8 @@ const Articles = ({ loggedIn }) => {
 						} else {
 							if (article.topic === selectedTopic) {
 								return <ArticleCard article={article} loggedIn={loggedIn} />;
+							} else {
+								return null;
 							}
 						}
 					})}
