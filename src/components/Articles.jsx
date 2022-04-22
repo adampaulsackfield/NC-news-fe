@@ -3,15 +3,16 @@ import { toast } from 'react-toastify';
 
 // TODO - Links for username, title and buttons for removing and viewing
 
-import { getArticles, getSortedArticles } from '../actions/api';
+import { getArticles } from '../actions/api';
 import ArticleCard from './ArticleCard';
 
 const Articles = ({ loggedIn }) => {
 	const [articles, setArticles] = useState([]);
 	const [selectedTopic, setSelectedTopic] = useState('all');
+	const [sortBy, setSortBy] = useState('none');
 
 	useEffect(() => {
-		getArticles()
+		getArticles(sortBy, selectedTopic)
 			.then((data) => {
 				setArticles([...data.articles]);
 			})
@@ -21,23 +22,14 @@ const Articles = ({ loggedIn }) => {
 				});
 				console.log(err);
 			});
-	}, []);
+	}, [sortBy, selectedTopic]);
 
 	const handleTopicSelector = (e) => {
 		setSelectedTopic(e.target.name);
 	};
 
 	const sortArticles = (e) => {
-		getSortedArticles(e.target.name)
-			.then((data) => {
-				setArticles([...data.articles]);
-			})
-			.catch((err) => {
-				toast.error('Failed to load articles. Please refresh the page.', {
-					theme: 'dark',
-				});
-				console.log(err);
-			});
+		setSortBy(e.target.name);
 	};
 
 	return (
@@ -121,21 +113,13 @@ const Articles = ({ loggedIn }) => {
 			<div className='grid grid-cols-1 gap-4'>
 				{articles &&
 					articles.map((article) => {
-						if (selectedTopic === 'all') {
-							return (
-								<ArticleCard
-									key={article.article_id}
-									article={article}
-									loggedIn={loggedIn}
-								/>
-							);
-						} else {
-							if (article.topic === selectedTopic) {
-								return <ArticleCard article={article} loggedIn={loggedIn} />;
-							} else {
-								return null;
-							}
-						}
+						return (
+							<ArticleCard
+								key={article.article_id}
+								article={article}
+								loggedIn={loggedIn}
+							/>
+						);
 					})}
 			</div>
 		</div>

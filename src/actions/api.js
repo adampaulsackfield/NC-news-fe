@@ -10,16 +10,32 @@ export const getArticle = (article_id) => {
 	});
 };
 
-export const getArticles = () => {
-	return axios.get(`${ENDPOINT}/articles`).then((res) => {
-		return res.data;
-	});
-};
-
-export const getSortedArticles = (sortBy) => {
-	return axios.get(`${ENDPOINT}/articles?sort_by=${sortBy}`).then((res) => {
-		return res.data;
-	});
+export const getArticles = (sortBy, selectedTopic) => {
+	if (sortBy === 'none') {
+		if (selectedTopic === 'all') {
+			return axios.get(`${ENDPOINT}/articles`).then((res) => {
+				return res.data;
+			});
+		} else {
+			return axios
+				.get(`${ENDPOINT}/articles?topic=${selectedTopic}`)
+				.then((res) => {
+					return res.data;
+				});
+		}
+	} else {
+		if (selectedTopic === 'all') {
+			return axios.get(`${ENDPOINT}/articles?sort_by=${sortBy}`).then((res) => {
+				return res.data;
+			});
+		} else {
+			return axios
+				.get(`${ENDPOINT}/articles?sort_by=${sortBy}&topic=${selectedTopic}`)
+				.then((res) => {
+					return res.data;
+				});
+		}
+	}
 };
 
 // Comments
