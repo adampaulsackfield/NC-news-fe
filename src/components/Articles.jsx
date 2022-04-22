@@ -71,7 +71,14 @@ const Articles = ({ loggedIn }) => {
 				{articles &&
 					articles.map((article) => {
 						if (selectedTopic === 'all') {
-							return <ArticleCard article={article} loggedIn={loggedIn} />;
+
+							return (
+								<ArticleCard
+									key={article.article_id}
+									article={article}
+									loggedIn={loggedIn}
+								/>
+							);
 						} else {
 							return (
 								<ArticleCard

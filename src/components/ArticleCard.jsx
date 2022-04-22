@@ -40,7 +40,7 @@ const ArticleCard = ({
 	};
 
 	return (
-		<div class='p-6'>
+		<div className='p-6'>
 			<div className='bg-white p-6 rounded-lg'>
 				<h3 className='text-light mb-2 text-sm font-bold'>
 					<img

@@ -40,7 +40,7 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
 
 			<nav
 				className={`w-full md:flex md:items-center md:w-auto ${
-					menu ? '' : ' hidden'
+					!menu ? ' hidden' : undefined
 				}`}
 				id='menu'
 			>
