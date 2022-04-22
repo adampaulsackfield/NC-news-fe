@@ -25,7 +25,6 @@ const TopicFilter = () => {
 
 			{topics &&
 				topics.map((currentTopic) => {
-					console.log(currentTopic);
 					return (
 						<Link
 							to={`/articles/topics/${currentTopic.slug}`}
