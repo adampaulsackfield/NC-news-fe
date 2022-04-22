@@ -12,15 +12,16 @@ The application has been designed with a mobile first approach and should scale 
 
 - List all articles [API Call]
 - List a single article [API Call]
-- Filter Articles [Local State, if this was a larger app with more content then I would use the API endpoint and only return selected articles]
+- Filter and Sort Articles [API Call]
 - List all comments for an article [API Call]
-- Upvote an article [API Call with Optimistic Rendering] [Can be actions from articles listing or single article components]
+- Upvote an article [API Call with Optimistic Rendering] [Can be actioned from articles listing or single article components]
 - Add a comment to an article [API Call with Optimistic Rendering]
 - Delete a comment that the user is the owner of [API Call with Optimistic Rendering]
+- Dynamic content - UI changes dependning on whether the user is logged in or not
 
 #### Technologies
 
-**Backend**
+##### Backend
 
 - Express - Lightweight framework for building APIs
 - PG - Postgres for Node
@@ -29,7 +30,7 @@ The application has been designed with a mobile first approach and should scale 
 - Jest - A framework used for Testing and Test Driven Development
 - Jest-sorted - A Jest package for checking the order of returned values
 
-**Frontend**
+##### Frontend
 
 - React - Frontend framework in JavaScript
 - React-router-dom - A package used for routing of a React Application

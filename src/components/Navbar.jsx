@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Squash as Hamburger } from 'hamburger-react';
 import { toast } from 'react-toastify';
+import { FaAngleDown } from 'react-icons/fa';
 
 import { UserContext } from '../context/UserContext';
 
@@ -79,6 +80,16 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
 							}`}
 						>
 							Login
+						</button>
+					</li>
+					<li>
+						<button
+							onClick={handleMockLogin}
+							className={`w-full p-4 text-center block transition ease-in duration-500 hover:text-light ${
+								loggedIn ? '' : ' hidden'
+							}`}
+						>
+							{userValues.user.username}
 						</button>
 					</li>
 					<li>

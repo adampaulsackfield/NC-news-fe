@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { useParams, Link } from 'react-router-dom';
 
 // TODO - Links for username, title and buttons for removing and viewing
 
-import { getArticles } from '../actions/api';
+import { getArticles, getTopics } from '../actions/api';
 import ArticleCard from './ArticleCard';
+import TopicFilter from './TopicFilter';
 
 const Articles = ({ loggedIn }) => {
+	const { topic } = useParams();
+
 	const [articles, setArticles] = useState([]);
-	const [selectedTopic, setSelectedTopic] = useState('all');
+	const [sortBy, setSortBy] = useState('none');
 
 	useEffect(() => {
-		getArticles()
+		getArticles(sortBy, topic)
 			.then((data) => {
 				setArticles([...data.articles]);
 			})
@@ -21,10 +25,10 @@ const Articles = ({ loggedIn }) => {
 				});
 				console.log(err);
 			});
-	}, []);
+	}, [sortBy, topic]);
 
-	const handleTopicSelector = (e) => {
-		setSelectedTopic(e.target.name);
+	const sortArticles = (e) => {
+		setSortBy(e.target.name);
 	};
 
 	return (
@@ -33,58 +37,54 @@ const Articles = ({ loggedIn }) => {
 				Articles Listing
 			</h1>
 
-			<div className='text-center'>
+			<TopicFilter />
+
+			<div className='text-center mt-2'>
+				<h1 className='text-xl mb-2'>Sort Articles</h1>
+
 				<button
-					onClick={(e) => handleTopicSelector(e)}
-					name='all'
+					onClick={(e) => sortArticles(e)}
+					name='article_id'
 					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
 				>
-					all
+					Article ID
 				</button>
 
 				<button
-					onClick={(e) => handleTopicSelector(e)}
-					name='coding'
+					onClick={(e) => sortArticles(e)}
+					name='created_at'
 					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
 				>
-					coding
+					Created At
 				</button>
 
 				<button
-					onClick={(e) => handleTopicSelector(e)}
-					name='cooking'
+					onClick={(e) => sortArticles(e)}
+					name='title'
 					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
 				>
-					cooking
+					Title
 				</button>
 
 				<button
-					onClick={(e) => handleTopicSelector(e)}
-					name='football'
-					className='text-light px-2 py-1 border-2 border-light inline rounded-lg transition ease-in duration-200 hover:scale-110'
+					onClick={(e) => sortArticles(e)}
+					name='votes'
+					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
 				>
-					football
+					Votes
 				</button>
 			</div>
 
 			<div className='grid grid-cols-1 gap-4'>
 				{articles &&
 					articles.map((article) => {
-						if (selectedTopic === 'all') {
-							return (
-								<ArticleCard
-									key={article.article_id}
-									article={article}
-									loggedIn={loggedIn}
-								/>
-							);
-						} else {
-							if (article.topic === selectedTopic) {
-								return <ArticleCard article={article} loggedIn={loggedIn} />;
-							} else {
-								return null;
-							}
-						}
+						return (
+							<ArticleCard
+								key={article.article_id}
+								article={article}
+								loggedIn={loggedIn}
+							/>
+						);
 					})}
 			</div>
 		</div>
