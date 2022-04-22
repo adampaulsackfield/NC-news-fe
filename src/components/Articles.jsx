@@ -6,6 +6,7 @@ import { useParams, Link } from 'react-router-dom';
 
 import { getArticles, getTopics } from '../actions/api';
 import ArticleCard from './ArticleCard';
+import TopicFilter from './TopicFilter';
 
 const Articles = ({ loggedIn }) => {
 	const { topic } = useParams();
@@ -18,12 +19,6 @@ const Articles = ({ loggedIn }) => {
 		getArticles(sortBy, topic)
 			.then((data) => {
 				setArticles([...data.articles]);
-			})
-			.then(() => {
-				getTopics().then((data) => {
-					console.log('data.topics');
-					setTopics([...data.topics]);
-				});
 			})
 			.catch((err) => {
 				toast.error('Failed to load articles. Please refresh the page.', {
@@ -43,30 +38,7 @@ const Articles = ({ loggedIn }) => {
 				Articles Listing
 			</h1>
 
-			<div className='text-center'>
-				<h1 className='text-xl mb-2'>Filter Articles</h1>
-
-				<Link
-					to='/articles'
-					className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
-				>
-					All
-				</Link>
-
-				{topics &&
-					topics.map((currentTopic) => {
-						console.log(currentTopic);
-						return (
-							<Link
-								to={`/articles/topics/${currentTopic.slug}`}
-								className='text-light px-2 py-1 border-2 border-light inline rounded-lg mr-2 transition ease-in duration-200 hover:scale-110'
-							>
-								{currentTopic.slug[0].toUpperCase() +
-									currentTopic.slug.slice(1)}
-							</Link>
-						);
-					})}
-			</div>
+			<TopicFilter topics={topics} setTopics={setTopics} />
 
 			<div className='text-center mt-2'>
 				<h1 className='text-xl mb-2'>Sort Articles</h1>
