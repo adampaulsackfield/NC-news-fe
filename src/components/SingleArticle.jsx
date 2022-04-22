@@ -155,6 +155,7 @@ const SingleArticle = ({ loggedIn }) => {
 											comments.map((comment) => {
 												return (
 													<Comment
+														key={comment.comment_id}
 														comment={comment}
 														comments={comments}
 														setComments={setComments}

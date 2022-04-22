@@ -12,35 +12,39 @@ const Comment = ({ comment, setComments, comments }) => {
 	const userValues = useContext(UserContext);
 
 	const handleDeleteComment = () => {
-		confirmAlert({
-			title: 'Delete Comment',
-			message: 'Are you sure you want to delete this comment?',
-			buttons: [
-				{
-					label: 'Yes',
-					onClick: () => {
-						deleteComment(comment.comment_id)
-							.then(() => {
-								const updatedComments = comments.filter(
-									(currentComment) =>
-										currentComment.comment_id !== comment.comment_id
-								);
-								setComments([...updatedComments]);
+		if (userValues.user.username !== comment.author) {
+			toast.error('You can only delete your own comments');
+		} else {
+			confirmAlert({
+				title: 'Delete Comment',
+				message: 'Are you sure you want to delete this comment?',
+				buttons: [
+					{
+						label: 'Yes',
+						onClick: () => {
+							deleteComment(comment.comment_id)
+								.then(() => {
+									const updatedComments = comments.filter(
+										(currentComment) =>
+											currentComment.comment_id !== comment.comment_id
+									);
+									setComments([...updatedComments]);
 
-								toast.success('Comment deleted successfully');
-							})
-							.catch((err) => {
-								toast.error('Failed to delete comment');
-								console.log(err);
-							});
+									toast.success('Comment deleted successfully');
+								})
+								.catch((err) => {
+									toast.error('Failed to delete comment');
+									console.log(err);
+								});
+						},
 					},
-				},
-				{
-					label: 'No',
-					onClick: () => toast.warning('Comment was not deleted'),
-				},
-			],
-		});
+					{
+						label: 'No',
+						onClick: () => toast.warning('Comment was not deleted'),
+					},
+				],
+			});
+		}
 	};
 
 	return (
@@ -60,7 +64,11 @@ const Comment = ({ comment, setComments, comments }) => {
 					<AiOutlineHeart className='inline text-light text-xl cursor-pointer' />{' '}
 					{comment.votes}
 				</p>
-				<p className={userValues.user.username !== comment.author && 'hidden'}>
+				<p
+					className={
+						userValues.user.username !== comment.author ? 'hidden' : undefined
+					}
+				>
 					<FaTrash
 						onClick={handleDeleteComment}
 						className='text-danger text-xl mt-1 cursor-pointer'
