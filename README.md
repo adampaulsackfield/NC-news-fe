@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# NC News
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+NC News is a Full-Stack Application built using Node, Express, React and SQl. It has full CRUD functionality and mocks a logged in user. This app utilizes a variety of technologies, best practices and packages. React's Context API is used for managing the User State, this decision was made purely to get experience with Context API as it is overkill for it's current use. The rest of the applications state is managed through props.
 
-In the project directory, you can run:
+When the app loads, all users are returned from the database and a random one is selected, when clicking on Login, you will be logged in as that user and can make any requests that are requried a logged in user. You can comment, upvote and delete your own comments. Throughout the app the user is informed of changes via Toast notifications. If the user is not logged in then certain functionality has been disabled: deleting a comment that isn't your own and upvoting.
 
-### `npm start`
+The application has been designed with a mobile first approach and should scale well across a multitude of device sizes. Styling was implemented using Tailwindcss, using custom colour, fonts and breakpoints.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- List all articles [API Call]
+- List a single article [API Call]
+- Filter Articles [Local State, if this was a larger app with more content then I would use the API endpoint and only return selected articles]
+- List all comments for an article [API Call]
+- Upvote an article [API Call with Optimistic Rendering] [Can be actions from articles listing or single article components]
+- Add a comment to an article [API Call with Optimistic Rendering]
+- Delete a comment that the user is the owner of [API Call with Optimistic Rendering]
 
-### `npm test`
+#### Technologies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Backend**
 
-### `npm run build`
+- Express - Lightweight framework for building APIs
+- PG - Postgres for Node
+- DOTENV - Used to obfuscate sensitive data from the code base
+- CORS - Used for making requests to the API from a different host
+- Jest - A framework used for Testing and Test Driven Development
+- Jest-sorted - A Jest package for checking the order of returned values
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Frontend**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- React - Frontend framework in JavaScript
+- React-router-dom - A package used for routing of a React Application
+- React-icons - A package used for adding Font Icons
+- React-toastify - A package for delivering constistent notifcations to the user
+- React-moment - A package for formatting date and time
+- React-hamburger - A package for adding simple hamburger menus
